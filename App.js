@@ -16,8 +16,11 @@ class App extends Component {
     save: 0,
     price: 0,
     discount: 0,
+    original:0,
     modalVisible: false,
-    history: [{}],
+    history: [{
+     
+    }],
   };
   setPrice = (e) => {
     const regex = /^[0-9\b]+$/;
@@ -46,6 +49,15 @@ class App extends Component {
       save: saveTotal,
     });
   };
+  saveData=(total)=>{
+    this.setState({
+      history:[...this.state.history,{
+        Original_Price:this.state.price,
+        Discount:this.state.discount,
+        Price_after: total
+      }]
+    })
+  }
   setModalVisible = (visible) => {
     this.setState({ modalVisible: visible });
   };
@@ -62,13 +74,15 @@ class App extends Component {
           animationType="slide"
           transparent={true}
           visible={this.state.modalVisible}
-          onRequestClose={() => {
-            Alert.alert("Modal has been closed.");
-          }}
+          
         >
-          <View style={styles.centeredView}>
+          <View style={styles.mainView}>
             <View style={styles.modalView}>
-              <Text style={styles.modalText}>Hello World!</Text>
+              <Text style={styles.modalText}>{this.state.history.map(record => 
+            <Text> {`Original: ${record.Original_Price}, after disc: ${record.Price_after}, Discount: ${record.Discount}`}</Text>
+
+              )}
+              </Text>
 
               <TouchableHighlight
                 style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
@@ -104,6 +118,15 @@ class App extends Component {
           <Text style={styles.title}>{`You Save: ${saveTotal}`}</Text>
           <Text style={styles.title}>{`Final Price: ${total}`}</Text>
         </View>
+        <View style={{flexDirection:'row'}}>
+        <TouchableHighlight
+          style={styles.openButton}
+          onPress={() => {
+            this.saveData(total);
+          }}
+        >
+          <Text style={styles.textStyle}>Save Calculation</Text>
+        </TouchableHighlight>
         <TouchableHighlight
           style={styles.openButton}
           onPress={() => {
@@ -112,6 +135,7 @@ class App extends Component {
         >
           <Text style={styles.textStyle}>Show History</Text>
         </TouchableHighlight>
+        </View>
       </View>
     );
   }
@@ -123,12 +147,36 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "cyan",
   },
+  mainView: {
+    flex: 1,
+    alignItems: "center",
+    marginTop: 22
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5
+  },
   header: {
     paddingTop: 40,
     backgroundColor: "black",
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center"
   },
   input: {
     width: 200,
@@ -143,7 +191,7 @@ const styles = StyleSheet.create({
   title: {
     color: "purple",
     fontSize: 20,
-    marginTop: 20,
+    marginTop: 12,
   },
   openButton: {
     backgroundColor: "lightblue",
