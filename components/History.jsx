@@ -16,7 +16,6 @@ import { ProductConsumer } from "../context";
 
 class History extends Component {
   state = {};
-  
   componentDidMount(){
     <ProductConsumer>
       {
@@ -36,6 +35,7 @@ class History extends Component {
         {(value) => {
           
           return (
+            <View>
             <DataTable>
               <DataTable.Header>
                 <DataTable.Title numeric >Original Price</DataTable.Title>
@@ -85,6 +85,10 @@ class History extends Component {
                 label="1 of 1"
               />
             </DataTable>
+            <TouchableOpacity style={{...styles.remove, width:60,height:30}} onPress={() => value.setNull()} ><Text style={{color:'white'}}>Clear</Text></TouchableOpacity>
+            
+            </View>
+            
           );
         }}
       </ProductConsumer>
@@ -106,6 +110,7 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    alignSelf:'center',
   },
   cross: {
     alignSelf: "center",
