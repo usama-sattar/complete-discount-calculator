@@ -12,6 +12,27 @@ import {
 } from "react-native";
 import { ProductConsumer } from "../context";
 class Home extends Component {
+  //it worked fine once and the other time does not, dont know why thats why created button in bottom.. may be server error
+
+  // componentDidMount() {
+  //   <ProductConsumer>
+  //     {(value) => {
+  //       return this.props.navigation.setOptions({
+  //         headerRight: () => (
+  //           <TouchableOpacity
+  //             style={styles.openButton}
+  //             activeOpacity={1}
+  //             onPress={() => {
+  //               this.props.navigation.navigate("History");
+  //             }}
+  //           >
+  //             <Text style={{ color: "white" }}>Show History</Text>
+  //           </TouchableOpacity>
+  //         ),
+  //       });
+  //     }}
+  //   </ProductConsumer>;
+  // }
   render() {
     return (
       <ProductConsumer>
@@ -44,8 +65,7 @@ class Home extends Component {
               <View style={{ flexDirection: "row" }}>
                 <TouchableOpacity
                   style={styles.openButton}
-                  onPress={(total) => value.saveData(total)
-                  }
+                  onPress={(total) => value.saveData(total)}
                 >
                   <Text style={{ color: "white" }}>Save Calculation</Text>
                 </TouchableOpacity>

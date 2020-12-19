@@ -16,24 +16,27 @@ import { ProductConsumer } from "../context";
 
 class History extends Component {
   state = {};
-  componentDidMount(){
-    <ProductConsumer>
-      {
-        value => {
-          this.props.navigation.setOptions({
-            headerRight: () => (
-              <TouchableOpacity style={{...styles.remove, width:60,height:30,marginRight:20,}} onPress={() => value.setNull()} ><Text style={{color:'white'}}>Clear</Text></TouchableOpacity>
-            ),
-          });
-        }
-      }
-    </ProductConsumer>
-  }
+  //it worked fine once and the other time does not, dont know why that why created button in bottom
+
+  // componentDidMount(){
+  //   <ProductConsumer>
+  //     {
+  //       value => {
+  //         return(
+  //         this.props.navigation.setOptions({
+  //           headerRight: () => (
+  //             <TouchableOpacity style={{...styles.remove, width:60,height:30,marginRight:20,}} onPress={() => value.setNull()} ><Text style={{color:'white'}}>Clear</Text></TouchableOpacity>
+  //           ),
+  //         }));
+  //       }
+  //     }
+  //   </ProductConsumer>
+  // }
   render() {
     return (
       <ProductConsumer>
+        
         {(value) => {
-          
           return (
             <View>
             <DataTable>
